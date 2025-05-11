@@ -7,11 +7,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #ffffff;
             margin: 0;
-            padding: 0;
+            padding: 5%;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -19,55 +25,161 @@
             min-height: 100vh;
             text-align: center;
         }
+
         h1 {
-            font-size: 44px;
+            font-size: 10vw; /* Escala con el ancho de la pantalla */
             color: #1a1a1a;
-            margin-bottom: 24px;
+            margin-bottom: 5vw;
             font-weight: 700;
             letter-spacing: -0.02em;
+            line-height: 1.2;
         }
+
         p {
-            font-size: 18px;
+            font-size: 4vw; /* Escala con el ancho de la pantalla */
             color: #404040;
-            max-width: 500px;
-            margin-bottom: 32px;
+            max-width: 80%; /* Máximo 80% del ancho */
+            margin-bottom: 5vw;
             line-height: 1.5;
         }
+
         .buy-button {
             background-color: #d32f2f;
             color: #ffffff;
-            padding: 14px 28px;
-            font-size: 18px;
+            padding: 2vw 4vw; /* Escala con el ancho de la pantalla */
+            font-size: 3.5vw; /* Escala con el ancho de la pantalla */
             font-weight: 400;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 1vw;
             display: inline-block;
-            margin-bottom: 24px;
+            margin-bottom: 5vw;
             transition: background-color 0.3s ease;
         }
+
         .buy-button:hover {
             background-color: #b71c1c;
         }
+
         .disclaimer {
-            font-size: 13px;
+            font-size: 2.5vw; /* Escala con el ancho de la pantalla */
             color: #757575;
-            max-width: 500px;
+            max-width: 80%;
             line-height: 1.4;
         }
+
         .social-icons {
-            margin: 24px 0;
+            margin: 5vw 0;
             display: flex;
-            gap: 16px;
+            gap: 3vw; /* Espaciado entre íconos */
             justify-content: center;
+            flex-wrap: wrap; /* Permite que los íconos se ajusten en múltiples líneas si es necesario */
         }
+
         .social-icon {
-            font-size: 24px;
+            font-size: 5vw; /* Escala con el ancho de la pantalla */
             color: #404040;
             text-decoration: none;
             transition: color 0.3s ease;
         }
+
         .social-icon:hover {
             color: #d32f2f;
+        }
+
+        /* Media Queries para ajustes específicos */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 8vw; /* Reducir tamaño en tabletas */
+                margin-bottom: 4vw;
+            }
+
+            p {
+                font-size: 3.5vw;
+                margin-bottom: 4vw;
+            }
+
+            .buy-button {
+                padding: 1.5vw 3vw;
+                font-size: 3vw;
+                border-radius: 0.8vw;
+            }
+
+            .disclaimer {
+                font-size: 2vw;
+            }
+
+            .social-icons {
+                gap: 2.5vw;
+            }
+
+            .social-icon {
+                font-size: 4vw;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 3%; /* Menos padding en móviles */
+            }
+
+            h1 {
+                font-size: 10vw; /* Ajuste para móviles pequeños */
+                margin-bottom: 5vw;
+            }
+
+            p {
+                font-size: 4.5vw;
+                margin-bottom: 5vw;
+            }
+
+            .buy-button {
+                padding: 2.5vw 5vw;
+                font-size: 4vw;
+                border-radius: 1vw;
+            }
+
+            .disclaimer {
+                font-size: 3vw;
+            }
+
+            .social-icons {
+                gap: 3vw;
+            }
+
+            .social-icon {
+                font-size: 6vw;
+            }
+        }
+
+        /* Ajustes para pantallas grandes */
+        @media (min-width: 1200px) {
+            h1 {
+                font-size: 44px; /* Tamaño fijo para pantallas grandes */
+                margin-bottom: 24px;
+            }
+
+            p {
+                font-size: 18px;
+                margin-bottom: 32px;
+            }
+
+            .buy-button {
+                padding: 14px 28px;
+                font-size: 18px;
+                border-radius: 8px;
+            }
+
+            .disclaimer {
+                font-size: 13px;
+            }
+
+            .social-icons {
+                gap: 16px;
+            }
+
+            .social-icon {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
