@@ -115,10 +115,19 @@
         .buy-button:active {
             transform: scale(0.98);
         }
-        #paypal-container-YAKA86ZVUQJHU {
-            margin: 2vw 0 1vw 0;
-            display: none;
+        /* PayPal button container - center and responsive */
+        .paypal-btn-container {
+            max-width: 340px;
+            margin: 2vw auto 1vw auto;
+            display: flex;
             justify-content: center;
+            align-items: center;
+        }
+        /* Force PayPal button to fit container and not collapse */
+        .paypal-btn-container > div {
+            width: 100% !important;
+            min-width: 220px !important;
+            max-width: 340px !important;
         }
         .disclaimer {
             color: var(--text-muted);
@@ -164,6 +173,9 @@
                 font-size: 0.97rem;
                 padding: 0.7em 0.7em;
             }
+            .paypal-btn-container {
+                max-width: 98vw;
+            }
         }
     </style>
     <!-- PayPal SDK -->
@@ -194,8 +206,10 @@
             <i class="fa-brands fa-paypal" aria-hidden="true"></i>
             <span id="button-text">Comprar nada por USD 1</span>
         </button>
-        <!-- Contenedor del botón oficial de PayPal, oculto hasta hacer clic -->
-        <div id="paypal-container-YAKA86ZVUQJHU"></div>
+        <!-- Contenedor del botón oficial de PayPal, oculto hasta hacer clic, dentro de un contenedor centrado y ancho fijo -->
+        <div class="paypal-btn-container" id="paypal-btn-container" style="display:none;">
+            <div id="paypal-container-YAKA86ZVUQJHU"></div>
+        </div>
 
         <p class="disclaimer" id="disclaimer">
             Al pagar, aceptas que <strong>no recibirás ningún producto ni servicio</strong>.<br>
@@ -224,12 +238,12 @@
         }).render("#paypal-container-YAKA86ZVUQJHU");
 
         const btnMostrar = document.getElementById('btn-mostrar-paypal');
-        const paypalContainer = document.getElementById('paypal-container-YAKA86ZVUQJHU');
+        const paypalBtnContainer = document.getElementById('paypal-btn-container');
 
         btnMostrar.addEventListener('click', function() {
             btnMostrar.style.display = 'none';
-            paypalContainer.style.display = 'flex';
-            paypalContainer.scrollIntoView({behavior: 'smooth', block: 'center'});
+            paypalBtnContainer.style.display = 'flex';
+            paypalBtnContainer.scrollIntoView({behavior: 'smooth', block: 'center'});
         });
 
         // Traducciones completas
