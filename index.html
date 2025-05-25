@@ -189,9 +189,6 @@
             <select class="lang-select" id="lang-select" aria-label="Seleccionar idioma">
                 <option value="es" data-flag="es">🇪🇸 Español</option>
                 <option value="en" data-flag="us">🇺🇸 English</option>
-                <option value="pt" data-flag="pt">🇵🇹 Português</option>
-                <option value="de" data-flag="de">🇩🇪 Deutsch</option>
-                <option value="fr" data-flag="fr">🇫🇷 Français</option>
             </select>
         </div>
     </div>
@@ -246,7 +243,7 @@
             paypalBtnContainer.scrollIntoView({behavior: 'smooth', block: 'center'});
         });
 
-        // Traducciones completas
+        // Solo español e inglés
         const translations = {
             es: {
                 title: "NadaPorUnDolar",
@@ -259,24 +256,6 @@
                 subtitle: "Pay USD 1 for absolutely nothing.",
                 button: "Buy nothing for USD 1",
                 disclaimer: "By paying, you agree that <strong>you will not receive any product or service</strong>.<br>Any notification related to payment processing does not constitute a product or service.<br><b>No refunds.</b>"
-            },
-            pt: {
-                title: "NadaPorUmDólar",
-                subtitle: "Pague USD 1 por absolutamente nada.",
-                button: "Comprar nada por USD 1",
-                disclaimer: "Ao pagar, você aceita que <strong>não receberá nenhum produto ou serviço</strong>.<br>Qualquer notificação relacionada ao processamento do pagamento não constitui um produto ou serviço.<br><b>Sem reembolsos.</b>"
-            },
-            de: {
-                title: "NichtsFürEinenDollar",
-                subtitle: "Zahle 1 USD für absolut nichts.",
-                button: "Nichts für 1 USD kaufen",
-                disclaimer: "Mit der Zahlung erklärst du dich damit einverstanden, dass <strong>du kein Produkt und keine Dienstleistung erhältst</strong>.<br>Jede Benachrichtigung im Zusammenhang mit der Zahlungsabwicklung stellt kein Produkt oder eine Dienstleistung dar.<br><b>Keine Rückerstattung.</b>"
-            },
-            fr: {
-                title: "RienPourUnDollar",
-                subtitle: "Payez 1 USD pour absolument rien.",
-                button: "Acheter rien pour 1 USD",
-                disclaimer: "En payant, vous acceptez que <strong>vous ne recevrez aucun produit ni service</strong>.<br>Toute notification liée au traitement du paiement ne constitue pas un produit ou un service.<br><b>Pas de remboursement.</b>"
             }
         };
 
@@ -294,10 +273,7 @@
             // Agrega la banderita visual en el select (solo para el seleccionado)
             const flagMap = {
                 es: "es",
-                en: "us",
-                pt: "pt",
-                de: "de",
-                fr: "fr"
+                en: "us"
             };
             langSelect.style.backgroundImage =
                 "url('https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/" +
