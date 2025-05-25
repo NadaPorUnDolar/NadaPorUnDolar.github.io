@@ -32,8 +32,50 @@
             justify-content: center;
             text-align: center;
         }
+        .top-bar {
+            width: 100vw;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 60px;
+            background: transparent;
+            z-index: 2;
+            padding-right: 3vw;
+            box-sizing: border-box;
+        }
+        .lang-select-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-top: 14px;
+        }
+        .lang-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding: 0.45em 2.3em 0.45em 2.3em;
+            font-size: 1.09em;
+            border-radius: 0.7em;
+            border: 1px solid #eee;
+            background: #fff url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>') no-repeat right 1em center/1.1em;
+            cursor: pointer;
+            font-family: inherit;
+            min-width: 140px;
+            transition: box-shadow 0.2s;
+        }
+        .lang-select:focus {
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+        @media (max-width: 600px) {
+            .top-bar { height: 40px; padding-right: 1vw; }
+            .lang-select { font-size: 1em; }
+        }
         header {
             margin-bottom: 3vw;
+            margin-top: 1vw;
         }
         h1 {
             font-size: clamp(2.4rem, 9vw, 5rem);
@@ -130,21 +172,32 @@
     </script>
 </head>
 <body>
+    <div class="top-bar">
+        <div class="lang-select-wrapper">
+            <select class="lang-select" id="lang-select" aria-label="Seleccionar idioma">
+                <option value="es" data-flag="es">🇪🇸 Español</option>
+                <option value="en" data-flag="us">🇺🇸 English</option>
+                <option value="pt" data-flag="pt">🇵🇹 Português</option>
+                <option value="de" data-flag="de">🇩🇪 Deutsch</option>
+                <option value="fr" data-flag="fr">🇫🇷 Français</option>
+            </select>
+        </div>
+    </div>
     <header>
-        <h1>NadaPorUnDolar</h1>
-        <p class="subtitle">Paga USD 1 por absolutamente nada.</p>
+        <h1 id="main-title">NadaPorUnDolar</h1>
+        <p class="subtitle" id="subtitle">Paga USD 1 por absolutamente nada.</p>
     </header>
 
     <main>
         <!-- Botón rojo personalizado que muestra el botón real de PayPal -->
         <button class="buy-button" id="btn-mostrar-paypal" aria-label="Pagar 1 dólar en PayPal (no recibirás nada)">
             <i class="fa-brands fa-paypal" aria-hidden="true"></i>
-            Comprar nada por USD 1
+            <span id="button-text">Comprar nada por USD 1</span>
         </button>
         <!-- Contenedor del botón oficial de PayPal, oculto hasta hacer clic -->
         <div id="paypal-container-YAKA86ZVUQJHU"></div>
 
-        <p class="disclaimer">
+        <p class="disclaimer" id="disclaimer">
             Al pagar, aceptas que <strong>no recibirás ningún producto ni servicio</strong>.<br>
             Cualquier notificación relacionada con el procesamiento del pago no constituye un producto o servicio.<br>
             <b>Sin reembolsos.</b>
@@ -165,7 +218,7 @@
         </div>
     </main>
     <script>
-        // Renderiza el botón de PayPal, pero lo oculta hasta que el usuario haga click en el rojo
+        // PayPal button logic
         paypal.HostedButtons({
             hostedButtonId: "YAKA86ZVUQJHU",
         }).render("#paypal-container-YAKA86ZVUQJHU");
@@ -176,9 +229,80 @@
         btnMostrar.addEventListener('click', function() {
             btnMostrar.style.display = 'none';
             paypalContainer.style.display = 'flex';
-            // Opcional: hace scroll al botón para mayor visibilidad en mobile
             paypalContainer.scrollIntoView({behavior: 'smooth', block: 'center'});
         });
+
+        // Traducciones completas
+        const translations = {
+            es: {
+                title: "NadaPorUnDolar",
+                subtitle: "Paga USD 1 por absolutamente nada.",
+                button: "Comprar nada por USD 1",
+                disclaimer: "Al pagar, aceptas que <strong>no recibirás ningún producto ni servicio</strong>.<br>Cualquier notificación relacionada con el procesamiento del pago no constituye un producto o servicio.<br><b>Sin reembolsos.</b>"
+            },
+            en: {
+                title: "NothingForADollar",
+                subtitle: "Pay USD 1 for absolutely nothing.",
+                button: "Buy nothing for USD 1",
+                disclaimer: "By paying, you agree that <strong>you will not receive any product or service</strong>.<br>Any notification related to payment processing does not constitute a product or service.<br><b>No refunds.</b>"
+            },
+            pt: {
+                title: "NadaPorUmDólar",
+                subtitle: "Pague USD 1 por absolutamente nada.",
+                button: "Comprar nada por USD 1",
+                disclaimer: "Ao pagar, você aceita que <strong>não receberá nenhum produto ou serviço</strong>.<br>Qualquer notificação relacionada ao processamento do pagamento não constitui um produto ou serviço.<br><b>Sem reembolsos.</b>"
+            },
+            de: {
+                title: "NichtsFürEinenDollar",
+                subtitle: "Zahle 1 USD für absolut nichts.",
+                button: "Nichts für 1 USD kaufen",
+                disclaimer: "Mit der Zahlung erklärst du dich damit einverstanden, dass <strong>du kein Produkt und keine Dienstleistung erhältst</strong>.<br>Jede Benachrichtigung im Zusammenhang mit der Zahlungsabwicklung stellt kein Produkt oder eine Dienstleistung dar.<br><b>Keine Rückerstattung.</b>"
+            },
+            fr: {
+                title: "RienPourUnDollar",
+                subtitle: "Payez 1 USD pour absolument rien.",
+                button: "Acheter rien pour 1 USD",
+                disclaimer: "En payant, vous acceptez que <strong>vous ne recevrez aucun produit ni service</strong>.<br>Toute notification liée au traitement du paiement ne constitue pas un produit ou un service.<br><b>Pas de remboursement.</b>"
+            }
+        };
+
+        function setLang(lang) {
+            document.getElementById('main-title').textContent = translations[lang].title;
+            document.getElementById('subtitle').textContent = translations[lang].subtitle;
+            document.getElementById('button-text').textContent = translations[lang].button;
+            document.getElementById('disclaimer').innerHTML = translations[lang].disclaimer;
+            document.documentElement.lang = lang;
+        }
+
+        // Bandera en el select
+        const langSelect = document.getElementById('lang-select');
+        function updateFlag() {
+            // Agrega la banderita visual en el select (solo para el seleccionado)
+            const flagMap = {
+                es: "es",
+                en: "us",
+                pt: "pt",
+                de: "de",
+                fr: "fr"
+            };
+            langSelect.style.backgroundImage =
+                "url('https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/" +
+                flagMap[langSelect.value] +
+                ".svg')," +
+                "url('data:image/svg+xml;utf8,<svg fill=\"gray\" height=\"20\" viewBox=\"0 0 20 20\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\"/></svg>')";
+            langSelect.style.backgroundPosition = "left 0.4em center, right 1em center";
+            langSelect.style.backgroundSize = "1.5em, 1.1em";
+            langSelect.style.paddingLeft = "2.3em";
+        }
+
+        langSelect.addEventListener('change', function() {
+            setLang(this.value);
+            updateFlag();
+        });
+
+        // Inicialización
+        setLang(langSelect.value);
+        updateFlag();
     </script>
 </body>
 </html>
