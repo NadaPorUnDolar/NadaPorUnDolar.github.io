@@ -73,6 +73,11 @@
         .buy-button:active {
             transform: scale(0.98);
         }
+        #paypal-container-YAKA86ZVUQJHU {
+            margin: 2vw 0 1vw 0;
+            display: none;
+            justify-content: center;
+        }
         .disclaimer {
             color: var(--text-muted);
             font-size: clamp(0.89rem, 2vw, 1.08rem);
@@ -98,10 +103,15 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            border: none;
+            background: none;
+            padding: 0.2em 0.45em;
+            border-radius: 50%;
         }
         .social-icon:hover,
         .social-icon:focus-visible {
             color: var(--primary);
+            background: rgba(211,47,47,0.07);
             transform: scale(1.15) rotate(-4deg);
         }
         @media (max-width: 600px) {
@@ -114,6 +124,10 @@
             }
         }
     </style>
+    <!-- PayPal SDK -->
+    <script 
+      src="https://www.paypal.com/sdk/js?client-id=BAAqUbxF_JCNZSKY6OcHXY842yQA-pkKx5jCY6WglBj_6SCH6xKSrIQOUlba52R3LDaQry3RTAQtv8lf_o&components=hosted-buttons&disable-funding=venmo&currency=USD">
+    </script>
 </head>
 <body>
     <header>
@@ -122,34 +136,49 @@
     </header>
 
     <main>
-        <!-- Botón de pago profesional y accesible -->
-        <a href="https://www.paypal.com/ncp/payment/YAKA86ZVUQJHU"
-           class="buy-button"
-           target="_blank"
-           rel="noopener noreferrer"
-           aria-label="Pagar 1 dólar en PayPal (no recibirás nada)">
+        <!-- Botón rojo personalizado que muestra el botón real de PayPal -->
+        <button class="buy-button" id="btn-mostrar-paypal" aria-label="Pagar 1 dólar en PayPal (no recibirás nada)">
             <i class="fa-brands fa-paypal" aria-hidden="true"></i>
             Comprar nada por USD 1
-        </a>
+        </button>
+        <!-- Contenedor del botón oficial de PayPal, oculto hasta hacer clic -->
+        <div id="paypal-container-YAKA86ZVUQJHU"></div>
+
         <p class="disclaimer">
             Al pagar, aceptas que <strong>no recibirás ningún producto ni servicio</strong>.<br>
             Cualquier notificación relacionada con el procesamiento del pago no constituye un producto o servicio.<br>
             <b>Sin reembolsos.</b>
         </p>
         <div class="social-icons" aria-label="Redes sociales">
-            <a href="https://x.com/NadaPorUnDolar" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X (Twitter)">
+            <a href="https://x.com/NadaPorUnDolar" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X">
                 <i class="fa-brands fa-x-twitter"></i>
             </a>
             <a href="https://www.youtube.com/@NadaPorUnDolar" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
                 <i class="fa-brands fa-youtube"></i>
             </a>
-            <a href="https://www.instagram.com/nadaporundolar/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
             <a href="https://www.tiktok.com/@nadaporundolar" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok">
                 <i class="fa-brands fa-tiktok"></i>
             </a>
+            <a href="https://www.instagram.com/nadaporundolar/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
         </div>
     </main>
+    <script>
+        // Renderiza el botón de PayPal, pero lo oculta hasta que el usuario haga click en el rojo
+        paypal.HostedButtons({
+            hostedButtonId: "YAKA86ZVUQJHU",
+        }).render("#paypal-container-YAKA86ZVUQJHU");
+
+        const btnMostrar = document.getElementById('btn-mostrar-paypal');
+        const paypalContainer = document.getElementById('paypal-container-YAKA86ZVUQJHU');
+
+        btnMostrar.addEventListener('click', function() {
+            btnMostrar.style.display = 'none';
+            paypalContainer.style.display = 'flex';
+            // Opcional: hace scroll al botón para mayor visibilidad en mobile
+            paypalContainer.scrollIntoView({behavior: 'smooth', block: 'center'});
+        });
+    </script>
 </body>
 </html>
