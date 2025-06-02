@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <style>
     :root {
-      --primary: #2e7d32; /* Changed from #d32f2f (red) to #2e7d32 (green) */
-      --primary-dark: #1b5e20; /* Changed from #b71c1c (dark red) to #1b5e20 (dark green) */
+      --primary: #2e7d32;
+      --primary-dark: #1b5e20;
       --text-main: #1a1a1a;
       --text-soft: #555555;
       --bg: #ffffff;
@@ -51,6 +51,9 @@
       color: var(--text-main);
       text-align: center;
       margin-bottom: 0.5vw;
+    }
+    .brand-name span.dollar {
+      color: #2e7d32; /* Verde para "Dolar" */
     }
     .subtitle {
       color: var(--text-soft);
@@ -105,7 +108,7 @@
     .link-btn:hover, .link-btn:focus-visible {
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: #ffffff;
-      box-shadow: 0 6px 24px rgba(46, 125, 50, 0.15); /* Changed from rgba(211, 47, 47, 0.15) to rgba(46, 125, 50, 0.15) */
+      box-shadow: 0 6px 24px rgba(46, 125, 50, 0.15);
       transform: translateY(-2px);
     }
     .icon-bg {
@@ -119,7 +122,7 @@
       font-size: 1.3em;
     }
     .link-btn.site .icon-bg {
-      background: var(--primary); /* Changed from var(--primary) (red) to var(--primary) (green) */
+      background: var(--primary);
     }
     .link-btn.site .icon-bg i {
       color: #ffffff;
@@ -168,7 +171,7 @@
 </head>
 <body>
   <div class="container">
-    <div class="brand-name">NadaPorUnDolar</div>
+    <div class="brand-name">NadaPorUn<span class="dollar">Dolar</span></div>
     <div class="subtitle">Enlaces oficiales</div>
     <div class="links-list">
       <a class="link-btn site" href="https://nadaporundolar.github.io/" target="_blank" rel="noopener">
