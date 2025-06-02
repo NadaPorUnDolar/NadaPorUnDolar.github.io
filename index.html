@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         :root {
-            --primary: #d32f2f;
-            --primary-dark: #b71c1c;
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
             --text-main: #1a1a1a;
             --text-soft: #555555;
             --text-muted: #757575;
@@ -33,48 +33,6 @@
             justify-content: center;
             text-align: center;
         }
-        .top-bar {
-            width: 100vw;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 60px;
-            background: transparent;
-            z-index: 2;
-            padding-right: 3vw;
-            box-sizing: border-box;
-        }
-        .lang-select-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            margin-top: 14px;
-        }
-        .lang-select {
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            padding: 0.45em 2.3em 0.45em 2.3em;
-            font-size: 1.09em;
-            border-radius: var(--border-radius);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            background: #fff url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>') no-repeat right 1em center/1.1em;
-            cursor: pointer;
-            font-family: inherit;
-            min-width: 140px;
-            transition: box-shadow var(--transition), border-color var(--transition);
-        }
-        .lang-select:focus {
-            box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.3);
-            border-color: var(--primary);
-        }
-        @media (max-width: 600px) {
-            .top-bar { height: 40px; padding-right: 1vw; }
-            .lang-select { font-size: 1em; padding: 0.4em 2em; }
-        }
         header {
             margin-bottom: 3vw;
             margin-top: 1vw;
@@ -85,6 +43,9 @@
             letter-spacing: -0.02em;
             margin-bottom: 1vw;
             text-transform: uppercase;
+        }
+        h1 span.dollar {
+            color: #2e7d32; /* Verde para "Dolar" basado en el logo */
         }
         p.subtitle {
             font-size: clamp(1.1rem, 3vw, 2.4rem);
@@ -127,7 +88,7 @@
         .buy-button:hover,
         .buy-button:focus-visible {
             transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(211, 47, 47, 0.15);
+            box-shadow: 0 8px 32px rgba(46, 125, 50, 0.15);
         }
         .buy-button:active {
             transform: scale(0.98);
@@ -150,7 +111,7 @@
             max-width: 420px;
             margin: 0 auto 3vw auto;
             line-height: 1.5;
-            background: rgba(211, 47, 47, 0.06);
+            background: rgba(46, 125, 50, 0.06);
             border-radius: var(--border-radius);
             padding: 0.8em 1.2em;
         }
@@ -177,7 +138,7 @@
         .social-icon:hover,
         .social-icon:focus-visible {
             color: var(--primary);
-            background: rgba(211, 47, 47, 0.07);
+            background: rgba(46, 125, 50, 0.07);
             transform: scale(1.15) rotate(-4deg);
         }
         @media (max-width: 600px) {
@@ -192,16 +153,8 @@
     </script>
 </head>
 <body>
-    <div class="top-bar">
-        <div class="lang-select-wrapper">
-            <select class="lang-select" id="lang-select" aria-label="Seleccionar idioma">
-                <option value="es" data-flag="es">🇪🇸 Español</option>
-                <option value="en" data-flag="us">🇺🇸 English</option>
-            </select>
-        </div>
-    </div>
     <header>
-        <h1 id="main-title">NadaPorUnDolar</h1>
+        <h1 id="main-title"><span>NADA</span> <span>POR</span> <span class="dollar">DOLAR</span></h1>
         <p class="subtitle" id="subtitle">Paga USD 1 por absolutamente nada.</p>
     </header>
 
@@ -259,53 +212,4 @@
                 paypalBtnContainer.scrollIntoView({behavior: 'smooth', block: 'center'});
             });
         });
-
-        // Lógica del selector de idioma
-        const translations = {
-            es: {
-                title: "NadaPorUnDolar",
-                subtitle: "Paga USD 1 por absolutamente nada.",
-                button: "Comprar nada por USD 1",
-                disclaimer: "Al pagar, aceptas que <strong>no recibirás ningún producto ni servicio</strong>.<br>Cualquier notificación relacionada con el procesamiento del pago no constituye un producto o servicio.<br><b>Sin reembolsos.</b>"
-            },
-            en: {
-                title: "NothingForADollar",
-                subtitle: "Pay USD 1 for absolutely nothing.",
-                button: "Buy nothing for USD 1",
-                disclaimer: "By paying, you agree that <strong>you will not receive any product or service</strong>.<br>Any notification related to payment processing does not constitute a product or service.<br><b>No refunds.</b>"
-            }
-        };
-
-        function setLang(lang) {
-            document.getElementById('main-title').textContent = translations[lang].title;
-            document.getElementById('subtitle').textContent = translations[lang].subtitle;
-            document.getElementById('button-text').textContent = translations[lang].button;
-            document.getElementById('disclaimer').innerHTML = translations[lang].disclaimer;
-            document.documentElement.lang = lang;
-        }
-
-        const langSelect = document.getElementById('lang-select');
-        function updateFlag() {
-            const flagMap = { es: "es", en: "us" };
-            langSelect.style.backgroundImage =
-                "url('https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/" +
-                flagMap[langSelect.value] +
-                ".svg')," +
-                "url('data:image/svg+xml;utf8,<svg fill=\"gray\" height=\"20\" viewBox=\"0 0 20 20\" width=\"20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\"/></svg>')";
-            langSelect.style.backgroundPosition = "left 0.4em center, right 1em center";
-            langSelect.style.backgroundSize = "1.5em, 1.1em";
-            langSelect.style.paddingLeft = "2.3em";
-        }
-
-        langSelect.addEventListener('change', function() {
-            setLang(this.value);
-            updateFlag();
-        });
-
-        setLang(langSelect.value);
-        updateFlag();
     </script>
-</body>
-</html>
-</body>
-</html>
